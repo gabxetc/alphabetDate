@@ -15,17 +15,19 @@ app_dates = rand_ops.sort_app_dates
 my_dates = rand_ops.sort_my_dates
 all_dates = rand_ops.sort_all_dates
 
-
+# Dates provided in the app
 def choose_rand_app_date():
     rand_app_date = random.randint(0, len(app_dates)-1)
     chosen_app_date = app_dates[rand_app_date]
     return chosen_app_date
 
+# Dates made by the user
 def choose_rand_my_date():
     rand_my_date = random.randint(0, len(my_dates)-1)
     chosen_my_date = my_dates[rand_my_date]
     return chosen_my_date
 
+# App dates and Homemade dates combined
 def choose_rand_all_date():
     rand_all_date = random.randint(0, len(all_dates)-1)
     chosen_all_date = all_dates[rand_all_date]

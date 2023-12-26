@@ -9,7 +9,7 @@ a list of strings(dates)'''
     - the file is then closed
     - the func returns a sorted list of app dates
 '''
-#sorted list of built in dates
+# Sorted list of dates provided in the app
 def sort_app_dates():
     file = open("app_dates.txt", 'r')
     app_dates = file.readlines()
@@ -17,7 +17,7 @@ def sort_app_dates():
     file.close()    
     return app_dates
 
-#sorted list of consumer added dates
+# Sorted list of dates made by the user
 def sort_my_dates():
     file = open("my_dates.txt", 'r')
     my_dates = file.readlines()
@@ -25,7 +25,7 @@ def sort_my_dates():
     file.close()    
     return my_dates
 
-#sorted list of combination of both built in and consumer added dates
+# Sorted list of App dates and Homemade dates combined
 def sort_all_dates():
     all_dates = sorted(sort_my_dates+sort_app_dates)
     return all_dates
