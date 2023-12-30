@@ -11,7 +11,7 @@ a list of strings(dates)'''
 '''
 # Sorted list of dates provided in the app
 def sort_app_dates():
-    file = open("app_dates.txt", 'r')
+    file = open("Dates/app_dates.txt", 'r')
     app_dates = file.readlines()
     app_dates.sort()
     file.close()    
@@ -19,7 +19,7 @@ def sort_app_dates():
 
 # Sorted list of dates made by the user
 def sort_my_dates():
-    file = open("my_dates.txt", 'r')
+    file = open("Dates/my_dates.txt", 'r')
     my_dates = file.readlines()
     my_dates.sort() #sort returns None
     file.close()    
@@ -29,3 +29,11 @@ def sort_my_dates():
 def sort_all_dates():
     all_dates = sorted(sort_my_dates+sort_app_dates)
     return all_dates
+
+def get_my_dates():
+    my_dates = sort_my_dates()
+    return my_dates
+
+def get_app_dates():
+    app_dates = sort_app_dates()
+    return app_dates
