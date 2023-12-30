@@ -26,8 +26,9 @@ class MyChronTestCase(unittest.TestCase):
 
     #This method ensures that add_my_dates correctly writes a homemade date to the my_dates.txt file
     #@unittest.skip('Work in progress')
+    @patch("sys.stdin", StringIO("Bounce dAte\nshopping date\nCOSTUME DATE\nice-cream Date"))
     def test_write_to_txt(self):
-        pass
+        self.assertEqual(homemade.add_my_dates(),homemade.get_new_file())
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,8 +20,9 @@ def ask_for_date():
     final_date = " ".join(my_own_date)
     return final_date
 
-def add_my_dates(my_own_date):
-    with open('Dates/my_dates.txt', 'a') as file:
+def add_my_dates():
+    my_own_date = ask_for_date()
+    with open('Dates/my_dates.txt', 'r+') as file:
         # moves the file pointer to the beginning before reading, 
         # so that we can check if the date already exists in the file.
         file.seek(0)
@@ -31,12 +32,11 @@ def add_my_dates(my_own_date):
         if my_own_date not in file.readlines():
             file.write(my_own_date)
             file.write('\n')
-            return file
+            return str(file)
         else:
             print("This type of date already exists!")
             return ask_for_date()
         
 def get_new_file():
-    my_own_date = ask_for_date()
-    final_file = add_my_dates(my_own_date)
+    final_file = add_my_dates()
     return final_file
