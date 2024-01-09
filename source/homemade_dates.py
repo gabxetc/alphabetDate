@@ -22,7 +22,7 @@ def ask_for_date():
 
 def add_my_dates():
     my_own_date = ask_for_date()
-    with open('Dates/my_dates.txt', 'r+') as file:
+    with open('dates/my_dates.txt', 'r+') as file:
         # moves the file pointer to the beginning before reading, 
         # so that we can check if the date already exists in the file.
         file.seek(0)

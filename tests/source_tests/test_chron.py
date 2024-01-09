@@ -11,12 +11,12 @@ class MyChronTestCase(unittest.TestCase):
 
     #This method ensures that a file that is not empty exists
     def test_not_empty(self):
-        with open("Dates/app_dates.txt", 'r') as file:
+        with open("dates/app_dates.txt", 'r') as file:
             self.assertIsNotNone(file)
     
-    @patch("sys.stdin", StringIO("APP\nPicnic Date\nyes\nyes"))
+    @patch("sys.stdin", StringIO("APP\nyes\nyes"))
     def test_select_list(self):
-        self.assertEqual(chron.select_list(), chron.chron_app_dates())
+        self.assertEquals(chron.select_list(), "You have chosen a Candle-light dinner date\n")
 
 
     #This method ensures that a date is chosen chronologically from the app_dates.txt
