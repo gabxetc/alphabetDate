@@ -1,20 +1,28 @@
 import unittest
 from io import StringIO
-import Source
-import Dates
-import Programme
+from unittest.mock import patch
+import source
+import dates
+import programme
+import source.chronological_dates as chron
 
 #These tests are for the chronological aspect of the application
 class MyChronTestCase(unittest.TestCase):
 
     #This method ensures that a file that is not empty exists
     def test_not_empty(self):
-        with open("tests/test_app_dates.txt", 'r') as file:
+        with open("Dates/app_dates.txt", 'r') as file:
             self.assertIsNotNone(file)
+    
+    @patch("sys.stdin", StringIO("APP\nPicnic Date\nyes\nyes"))
+    def test_select_list(self):
+        self.assertEqual(chron.select_list(), chron.chron_app_dates())
+
 
     #This method ensures that a date is chosen chronologically from the app_dates.txt
     @unittest.skip("demonstrating skipping")
     def test_chron_app_dates(self):
+        
         pass
 
     #This method ensures that a date is chosen chronologically from the my_dates.txt

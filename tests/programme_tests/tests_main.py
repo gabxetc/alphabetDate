@@ -1,8 +1,8 @@
 import unittest
 from io import StringIO
-import Source
-import Dates
-import Programme
+import source
+import dates
+import programme
 
 class MyMainTestCase(unittest.TestCase):
     #This test ensures that a user is succesfully registered and added to the database

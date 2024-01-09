@@ -1,4 +1,4 @@
-import Dates.date_sorter as home_ops
+import dates.date_sorter as home_ops
 
 my_dates = home_ops.sort_my_dates
 
@@ -13,7 +13,7 @@ enter a new/different date
 # Split the input by spaces and into a list[str]
 # join the words together to make one string and not a list[str]
 def ask_for_date():
-    my_own_date = input("Type your date idea: ").title().replace("-"," ").split(" ")
+    my_own_date = input("Type your date idea: ").strip().title().replace("-"," ").split(" ")
     for i in my_own_date:
         if i.isalpha() == False:
             return ask_for_date and "Please enter a valid date idea."

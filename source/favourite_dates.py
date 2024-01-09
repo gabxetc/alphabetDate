@@ -1,4 +1,4 @@
-import date_sorter as chron_ops
+import dates.date_sorter as chron_ops
 
 '''
     The following functions retrieve the list[str]
@@ -10,8 +10,8 @@ my_dates = chron_ops.sort_my_dates
 all_dates = chron_ops.sort_all_dates
 
 # These variables are initializers of valid answers from the input 
-yes = 'yes'.capitalize()
-no = 'no'.capitalize()
+yes = 'yes'
+no = 'no'
 
 remain = " will remain in your favourites"
 not_added = " will not be added to your favourites"
@@ -133,9 +133,9 @@ def remove_all_faves(all_faves):
     - remove_fav_action: checks if the user would like to remove the current date from the favourite list
 '''
 def make_fav_action(date):
-    add_favourite = input("Would you like to add "+ date + "to your favourites list?\n")
+    add_favourite = input("Would you like to add "+ date + "to your favourites list? ").lower().strip()
     return yes or no
 
 def remove_fav_action(date):
-    remove_favourite = input("Would you like to remove "+ date + "from your favourite list?\n")
+    remove_favourite = input("Would you like to remove "+ date + "from your favourite list? ").lower().strip()
     return yes or no

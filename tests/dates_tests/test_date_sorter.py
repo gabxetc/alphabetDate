@@ -1,8 +1,8 @@
 import unittest
 from io import StringIO
-import Source
-import Dates.date_sorter as sorting
-import Programme
+import source
+import dates.date_sorter as sorting
+import programme
 
 
 class MySorterTestCase(unittest.TestCase):

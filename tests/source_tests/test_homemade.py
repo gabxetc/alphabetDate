@@ -1,13 +1,12 @@
 import unittest
 from unittest import mock
-import Source
-import Dates
-import Programme
+import source
+import dates
+import programme
 from unittest.mock import patch
 from io import StringIO
 import os
-from io import StringIO  
-import Source.homemade_dates as homemade
+import source.homemade_dates as homemade
 
 class MyChronTestCase(unittest.TestCase):
     #This function ensures that the input is correctly converted to "title"

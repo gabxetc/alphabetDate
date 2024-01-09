@@ -1,6 +1,6 @@
 import random
 import sys
-import date_sorter as rand_ops
+import dates.date_sorter as rand_ops
 
 '''The following funtions select a random date
 from the different lists of dates and saves it 
