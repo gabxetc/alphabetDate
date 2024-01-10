@@ -1,6 +1,7 @@
 import sys
 sys.path.append('/home/gabxetc/Documents/solutions/alphabetDate')  # Replace this path with your project's root path
 import dates.date_sorter as chron_ops
+from typing import Union
 
 app_dates = chron_ops.sort_app_dates()
 my_dates = chron_ops.sort_my_dates()
@@ -16,13 +17,14 @@ all_dates_list = 'all'
 
 
 def select_list():
+    date_index = 0
     choose_list = input("Which list of dates would you list to search? ").lower().strip()
     if choose_list == app_dates_list:
-        return chron_app_dates()
+        return chron_app_dates(date_index) 
     elif choose_list == my_dates_list:
-        return chron_my_dates()
+        return chron_my_dates(date_index)
     elif choose_list == all_dates_list:
-        return chron_all_dates()
+        return chron_all_dates(date_index)
     else:
         print("Please enter a valid list.")
         return select_list()
@@ -60,55 +62,52 @@ dates. It does this by using the index of each date to move through the list.
 '''
 
 # Dates provided in the app
-def chron_app_dates():
-    app_date_index = 0
+def chron_app_dates(date_index) -> Union[str, bool]:
     go_next = True
     selected = False
 
-    for date in app_dates:
-        if select_date(selected, go_next) == True:
-            chosen_app_date = app_dates[app_date_index]
-            return answer + chosen_app_date
-        elif select_date(selected, go_next) == False:
-            app_date_index += 1
-            if app_date_index > len(app_dates)-1:
-                app_date_index = 0
-                return select_date(False, True)
+    # for date in app_dates: -> we don't need the for loop anymore because we have a while loop
+    if select_date(selected, go_next) == True:
+        chosen_app_date = app_dates[date_index]
+        final_date = answer + chosen_app_date
+        return final_date
+    elif select_date(selected, go_next) == False:
+        date_index += 1
+        if date_index > len(app_dates)-1:
+            date_index = 0
             return select_date(False, True)
+        return select_date(False, True)
 
 # Dates made by the user
-def chron_my_dates():
-    my_date_index = 0
-    go_next = False
+def chron_my_dates(date_index) -> Union[str, bool]: # Union specifies the return type of the function
+    go_next = True
     selected = False
 
-    for date in my_dates:
-        result = select_date(selected, go_next)
-        if result == True:
-            chosen_app_date = date[my_date_index]
-            return "You have selected a " + chosen_app_date
-        elif result == False:
-            my_date_index += 1
-            if my_date_index > len(my_dates)-1:
-                my_date_index = 0
-                return select_date(False, True)
+    if select_date(selected, go_next) == True:
+        chosen_app_date = my_dates[date_index]
+        final_date = answer + chosen_app_date
+        return final_date
+    elif select_date(selected, go_next) == False:
+        date_index += 1
+        if date_index > len(my_dates)-1:
+            date_index = 0
             return select_date(False, True)
+        return select_date(False, True)
 
 # App dates and Homemade dates combined
-def chron_all_dates():
-    all_date_index = 0
-    go_next = False
+def chron_all_dates(date_index=int) -> Union[str, bool]:
+    go_next = True
     selected = False
 
-    for date in all_dates:
-        result = select_date(selected, go_next)
-        if result == True:
-            chosen_app_date = date[all_date_index]
-            return "You have selected a " + chosen_app_date
-        elif result == False:
-            all_date_index += 1
-            if all_date_index > len(all_dates)-1:
-                all_date_index = 0
-                return select_date(False, True)
+    if select_date(selected, go_next) == True:
+        chosen_app_date = all_dates[date_index]
+        final_date = answer + chosen_app_date
+        return final_date
+    else:
+        date_index += 1
+        if date_index > len(all_dates)-1:
+            date_index = 0
             return select_date(False, True)
+        return select_date(False, True)
+
         
