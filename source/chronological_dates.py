@@ -15,6 +15,10 @@ app_dates_list = 'app'
 my_dates_list = 'my'
 all_dates_list = 'all'
 
+'''
+    The following funtion handles the route of the app
+    after choosing which list you'd like to pick a date from.
+'''
 
 def select_list():
     date_index = 0
@@ -29,8 +33,22 @@ def select_list():
         print("Please enter a valid list.")
         return select_list()
 
+'''
+    The following function handles the while loop of iterating through dates
+    in the chosen list. It does this by:
+    - while the user hasn't selcted a date and the program should go to the next date
+    - the program will ask if you'd like to select the current date
+    if yes:
+        - it will ask if you are sure 
+        - if you are sure:
+            it will return true then go back to the respective date list handler function
+        - if you are not sure:
+            it will ask you if you would like to choose the current date you are on and continue in the while loop
+    if no:
+        - it will return false and index to the next date in the respective date list handler function
+'''
 def select_date(selected, go_next):
-    while selected == False and go_next == True:
+    if selected == False and go_next == True:
         choose_date = input("Would you like to select this date? ").lower().strip()
         if choose_date == yes:
             double_check = input("Are you sure you would like to choose this date? ")
@@ -39,17 +57,16 @@ def select_date(selected, go_next):
                 go_next = False
                 return True
             else:
-                selected = False
-                go_next = True
+                return select_date(False, True)
         else:
             selected = False
             go_next = True
             return False
 
 '''The following function monitors the action of iterating through the list of 
-dates. It does this by using the index of each date to move through the list.
+dates. It does this by using a counter to index through each date in the list.
     - while we haven't selected a date and while we go next
-    - we loop through each date in the list of dates
+    - we check if the user has chosen that date
     - we then check if the user has selected the date
     - if yes:
         - we return the date at the current_app_date (index) and exit the while loop.
@@ -62,16 +79,16 @@ dates. It does this by using the index of each date to move through the list.
 '''
 
 # Dates provided in the app
-def chron_app_dates(date_index) -> Union[str, bool]:
+def chron_app_dates(date_index=int):
     go_next = True
     selected = False
 
-    # for date in app_dates: -> we don't need the for loop anymore because we have a while loop
+    # for date in app_dates: -> we don't need the for loop anymore because we are using conditional statments and function calls for the program
     if select_date(selected, go_next) == True:
         chosen_app_date = app_dates[date_index]
         final_date = answer + chosen_app_date
         return final_date
-    elif select_date(selected, go_next) == False:
+    else:
         date_index += 1
         if date_index > len(app_dates)-1:
             date_index = 0
@@ -79,7 +96,7 @@ def chron_app_dates(date_index) -> Union[str, bool]:
         return select_date(False, True)
 
 # Dates made by the user
-def chron_my_dates(date_index) -> Union[str, bool]: # Union specifies the return type of the function
+def chron_my_dates(date_index):
     go_next = True
     selected = False
 
@@ -87,7 +104,7 @@ def chron_my_dates(date_index) -> Union[str, bool]: # Union specifies the return
         chosen_app_date = my_dates[date_index]
         final_date = answer + chosen_app_date
         return final_date
-    elif select_date(selected, go_next) == False:
+    else:
         date_index += 1
         if date_index > len(my_dates)-1:
             date_index = 0
@@ -95,7 +112,7 @@ def chron_my_dates(date_index) -> Union[str, bool]: # Union specifies the return
         return select_date(False, True)
 
 # App dates and Homemade dates combined
-def chron_all_dates(date_index=int) -> Union[str, bool]:
+def chron_all_dates(date_index): #-> Union[str, bool] Union specifies the return type of the function
     go_next = True
     selected = False
 

@@ -16,16 +16,29 @@ class MyChronTestCase(unittest.TestCase):
     def test_not_empty(self):
         with open("dates/app_dates.txt", "r") as file:
             self.assertIsNotNone(file)
-
+    
+    #This method tests selecting the first date from the app list of dates
     @patch("sys.stdin", StringIO("APP\nyes\nyes"))
     def test_select_app_list(self):
         self.assertEquals(chron.select_list(), answer + (dating.sort_app_dates())[0])
 
+    #This method tests selecting the second date from the app list of dates
+    @patch("sys.stdin", StringIO("APP\nno\nyes\nyes"))
+    def test_select_second_date_app_list(self):
+        self.assertEquals(chron.select_list(), answer + (dating.sort_app_dates())[1])
+    
+    #This method tests selecting the first date from your list of dates
     @patch("sys.stdin", StringIO("mY\nyes\nyes"))
     def test_select_my_list(self):
         self.assertEquals(chron.select_list(), answer + (dating.sort_my_dates())[0])
 
+    #This method tests selecting the first date from all lists of dates
     @patch("sys.stdin", StringIO("all\nyes\nyes"))
+    def test_select_all_list(self):
+        self.assertEquals(chron.select_list(), answer + (dating.sort_all_dates())[0])
+
+    #This method tests selecting the incorrect input of choosing a list then the correct input
+    @patch("sys.stdin", StringIO("jgbsdg\nall\nyes\nyes"))
     def test_select_all_list(self):
         self.assertEquals(chron.select_list(), answer + (dating.sort_all_dates())[0])
 
