@@ -1,6 +1,8 @@
 import dates.date_sorter as home_ops
 
-my_dates = home_ops.sort_my_dates
+my_dates = home_ops.sort_my_dates()
+yes = 'yes'
+no = 'no'
 
 '''The following funtions are intended to ask ask the user to input their date idea
 Then the programme will access the my_dates text file and write their inputed date
@@ -13,30 +15,68 @@ enter a new/different date
 # Split the input by spaces and into a list[str]
 # join the words together to make one string and not a list[str]
 def ask_for_date():
-    my_own_date = input("Type your date idea: ").strip().title().replace("-"," ").split(" ")
+    my_own_date = input("Type your date idea: ").strip().capitalize().replace("-"," ").split(" ")
     for i in my_own_date:
         if i.isalpha() == False:
             return ask_for_date and "Please enter a valid date idea."
     final_date = " ".join(my_own_date)
     return final_date
 
+def ask_again():
+    try_again = input("Would you still like to add a new date to your personal list of dates?").lower().strip()
+    if try_again == yes:
+        add_my_dates()
+    else:
+        print("Alright, goodbye!")
+
+
 def add_my_dates():
     my_own_date = ask_for_date()
-    with open('dates/my_dates.txt', 'r+') as file:
-        # moves the file pointer to the beginning before reading, 
-        # so that we can check if the date already exists in the file.
-        file.seek(0)
-        # if my_own_date not in my_dates: 
-        '''I'm not sure if i want to check inside 
-        the sorted list for the value or in the file for the value'''
-        if my_own_date not in file.readlines():
-            file.write(my_own_date)
-            file.write('\n')
-            return str(file)
-        else:
+    file_path = 'dates/my_dates.txt'
+
+    with open(file_path, 'a+') as file:
+        my_dates = [line.strip() for line in file.readlines()]
+        
+        if my_own_date in my_dates:
             print("This type of date already exists!")
-            return ask_for_date()
+            ask_again()
+        else:
+            file.write(my_own_date + '\n')
+            return file
+        
+    # my_own_date = ask_for_date()
+    # file = open('dates/my_dates.txt', 'a+')
+    # my_dates = file.readlines()
+    # if my_own_date in my_dates:
+    #     print("This type of date already exists!")
+    #     ask_again()
+    # else:
+    #     file.write(my_own_date)
+    #     file.write('\n')
+    #     file.close()
+    #     return str(file)
+    
+    
+    # with open('dates/my_dates.txt', 'a+') as file:
+    #     # file.seek(0) moves the file pointer to the beginning before reading, 
+    #     # so that we can check if the date already exists in the file.
+    #     with open(file_path, 'a+') as file:
+    #         my_dates = [line.strip() for line in file.readlines()]
+            
+    #         if my_own_date in my_dates:
+    #             print("This type of date already exists!")
+    #             ask_again()
+    #         else:
+    #             file.write(my_own_date + '\n')
+                
+    #             # Go back to the beginning of the file to read its content
+    #             file.seek(0)
+    #             file_content = file.read()
+                
+    #     return file_content
+                
         
 def get_new_file():
     final_file = add_my_dates()
     return final_file
+

@@ -24,11 +24,14 @@ def select_list():
     date_index = 0
     choose_list = input("Which list of dates would you list to search? ").lower().strip()
     if choose_list == app_dates_list:
-        return chron_app_dates(date_index) 
+        return chron_app_dates(date_index)
+    
     elif choose_list == my_dates_list:
         return chron_my_dates(date_index)
+    
     elif choose_list == all_dates_list:
         return chron_all_dates(date_index)
+    
     else:
         print("Please enter a valid list.")
         return select_list()
@@ -51,7 +54,7 @@ def select_date(selected, go_next):
     if selected == False and go_next == True:
         choose_date = input("Would you like to select this date? ").lower().strip()
         if choose_date == yes:
-            double_check = input("Are you sure you would like to choose this date? ")
+            double_check = input("Are you sure you would like to choose this date? ").lower().strip()
             if double_check == yes:
                 selected = True
                 go_next = False
@@ -62,6 +65,8 @@ def select_date(selected, go_next):
             selected = False
             go_next = True
             return False
+    else:
+        return True
 
 '''The following function monitors the action of iterating through the list of 
 dates. It does this by using a counter to index through each date in the list.
@@ -79,7 +84,7 @@ dates. It does this by using a counter to index through each date in the list.
 '''
 
 # Dates provided in the app
-def chron_app_dates(date_index=int):
+def chron_app_dates(date_index):
     go_next = True
     selected = False
 
