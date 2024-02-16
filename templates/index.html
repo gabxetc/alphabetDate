@@ -1,13 +1,33 @@
-
-
-{% extends 'base.html' %}
-
-{% block head %}
-
-{% endblock %}
-
-{% block body %}
-
-<h1>Templates</h1>
-
+{% extends 'base.html' %} {% block head %}
+<title>Alphabet Date</title>
+{% endblock %} {% block body %}
+<div class="content">
+  <h1>Alphabet Date</h1>
+  {% if dates|length < 1 %}
+  <h4>There are no tasks. Create one Below!</h4>
+  {% else %}
+  <table>
+    <tr>
+      <th>Date Name</th>
+      <th>Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for date in thedate %}
+    <tr>
+      <td>{{ date.content }}</td>
+      <td>{{ date.date_created.date() }}</td>
+      <td>
+        <a href="/delete/{{date.id}}">Delete</a>
+        <br />
+        <a href="/update/{{date.id}}">Update</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+  <form actions="/" method="POST">
+    <input type="text" name="content" id="content" />
+    <input type="submit" value="Add Date" />
+  </form>
+</div>
 {% endblock %}
